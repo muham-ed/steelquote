@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/functions.php';
+require_once 'includes/auth.php';
 $page_title = 'تسجيل الدخول';
 
 if (is_logged_in()) {
