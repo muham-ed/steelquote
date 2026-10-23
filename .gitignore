@@ -5,10 +5,12 @@
 *.swo
 *.zip
 
-# Server logs & OS files
+# Server logs, videos & OS files
 .DS_Store
 Thumbs.db
 *.log
+*.mp4
+vande/
 
 # Uploads directory (keep directory structure)
 uploads/logos/*
