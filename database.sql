@@ -30,7 +30,7 @@ CREATE TABLE `users` (
 
 -- Insert Super Admin user (Password: 123456)
 INSERT INTO `users` (`id`, `role`, `name`, `email`, `password`, `workshop_name`, `phone`, `address`, `subscription_status`, `trial_ends_at`) VALUES
-(1, 'admin', 'مدير النظام (مالك التطبيق)', 'admin@steelquote.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'إدارة منصة SteelQuote', '01012345678', 'القاهرة - المقر الرئيسي', 'active', '2030-12-31');
+(1, 'admin', 'المهندس محمد (مالك المنصة)', 'admin@steelquote.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'إدارة منصة SteelQuote', '01060828627', 'القاهرة - المقر الرئيسي', 'active', '2030-12-31');
 
 -- --------------------------------------------------------
 

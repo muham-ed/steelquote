@@ -3,6 +3,7 @@
 .vscode/
 *.swp
 *.swo
+*.zip
 
 # Server logs & OS files
 .DS_Store
