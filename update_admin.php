@@ -6,7 +6,6 @@ $page_title = 'تحديث بيانات مدير النظام الخصي';
 $message = '';
 $error = '';
 
-// Fetch current admin user if exists
 $stmt = $pdo->prepare("SELECT * FROM users WHERE role = 'admin' LIMIT 1");
 $stmt->execute();
 $current_admin = $stmt->fetch();
@@ -50,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Reload current admin
 $stmt = $pdo->prepare("SELECT * FROM users WHERE role = 'admin' LIMIT 1");
 $stmt->execute();
 $current_admin = $stmt->fetch();
@@ -95,14 +93,14 @@ include 'includes/header.php';
                     <label class="form-label fw-bold">رقم الفودافون كاش / الواتساب لتحويل الاشتراكات <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                        <input type="text" name="phone" class="form-control fw-bold text-primary" placeholder="01012345678" value="<?= clean($current_admin['phone'] ?? '') ?>" required>
+                        <input type="text" name="phone" class="form-control fw-bold text-primary" placeholder="01060828627" value="<?= clean($current_admin['phone'] ?? '01060828627') ?>" required>
                     </div>
                     <small class="text-muted">هذا الرقم سيظهر لأصحاب الورش للتحويل المالي عليه والتواصل معك فوراً.</small>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">كلمة المرور الجديدة القوية</label>
-                    <input type="password" name="password" class="form-control" placeholder="أتركها فارغة إذا لم ترد تغيير كلمة السر الحالية">
+                    <input type="password" name="password" class="form-control" placeholder="أدخل كلمة سر جديدة وصعبة التوقع">
                 </div>
 
                 <div class="d-grid mt-4">

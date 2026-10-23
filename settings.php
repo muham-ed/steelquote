@@ -5,6 +5,11 @@ require_login();
 $page_title = 'إعدادات الورشة والحساب';
 $user = current_user();
 
+// Fetch Super Admin contact phone dynamically
+$admin_stmt = $pdo->query("SELECT phone FROM users WHERE role = 'admin' ORDER BY id ASC LIMIT 1");
+$admin_user = $admin_stmt->fetch();
+$admin_phone = !empty($admin_user['phone']) ? $admin_user['phone'] : '01060828627';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = clean($_POST['name'] ?? '');
     $workshop_name = clean($_POST['workshop_name'] ?? '');
@@ -77,7 +82,7 @@ include 'includes/header.php';
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">رقم الهاتف / الواتساب</label>
+                        <label class="form-label fw-bold">رقم الهاتف / الواتساب الخاص بالورشة</label>
                         <input type="text" name="phone" class="form-control" value="<?= clean($user['phone'] ?? '') ?>">
                     </div>
 
@@ -140,7 +145,10 @@ include 'includes/header.php';
 
             <div class="alert alert-info small mb-0">
                 <i class="bi bi-headset me-1"></i> <strong>للتجديد والاشتراكات السنوية:</strong><br>
-                تواصل مع إدارة SteelQuote عبر واتساب: <code>01012345678</code>
+                تواصل مع إدارة SteelQuote عبر واتساب / فودافون كاش: <br>
+                <a href="https://api.whatsapp.com/send?phone=20<?= clean($admin_phone) ?>" target="_blank" class="fw-bold text-primary fs-6 text-decoration-none">
+                    <i class="bi bi-whatsapp"></i> <?= clean($admin_phone) ?>
+                </a>
             </div>
         </div>
     </div>
