@@ -16,13 +16,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($new_pass) < 6) {
         $error = 'كلمة المرور يجب أن تكون 6 أحرف أو أكثر.';
     } else {
-        $hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+        try {
+            $hashed = password_hash($new_pass, PASSWORD_DEFAULT);
 
-        // Update user ID 1 or role 'admin'
-        $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE role = 'admin' LIMIT 1");
-        $stmt->execute([$new_name, $new_email, $hashed]);
+            // Check if admin user exists
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE role = 'admin' LIMIT 1");
+            $stmt->execute();
+            $admin = $stmt->fetch();
 
-        $message = 'تم تحديث بيانات مدير النظام بنجاح! يمكنك الآن تسجيل الدخول ببريدك الإلكتروني الشخصي وكلمة المرور الجديدة.';
+            if ($admin) {
+                $update = $pdo->prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?");
+                $update->execute([$new_name, $new_email, $hashed, $admin['id']]);
+            } else {
+                $insert = $pdo->prepare("INSERT INTO users (role, name, email, password, workshop_name, subscription_status, trial_ends_at) VALUES ('admin', ?, ?, ?, 'إدارة منصة SteelQuote', 'active', '2030-12-31')");
+                $insert->execute([$new_name, $new_email, $hashed]);
+            }
+
+            $message = 'تم تحديث وتأمين بيانات مدير النظام بنجاح! يمكنك الآن تسجيل الدخول ببريدك الإلكتروني الشخصي وكلمة المرور الجديدة.';
+        } catch (Exception $e) {
+            $error = 'حدث خطأ أثناء التحديث: ' . $e->getMessage();
+        }
     }
 }
 
@@ -39,14 +52,14 @@ include 'includes/header.php';
             </div>
 
             <?php if ($message): ?>
-                <div class="alert alert-success fw-bold">
+                <div class="alert alert-success fw-bold shadow-sm">
                     <i class="bi bi-check-circle me-1"></i> <?= $message ?><br>
-                    <a href="login.php" class="btn btn-sm btn-success mt-2 fw-bold">الذهاب لتسجيل الدخول</a>
+                    <a href="login.php" class="btn btn-sm btn-success mt-2 fw-bold"><i class="bi bi-box-arrow-in-right me-1"></i> الذهاب لتسجيل الدخول الان</a>
                 </div>
             <?php endif; ?>
 
             <?php if ($error): ?>
-                <div class="alert alert-danger fw-bold">
+                <div class="alert alert-danger fw-bold shadow-sm">
                     <i class="bi bi-exclamation-triangle me-1"></i> <?= $error ?>
                 </div>
             <?php endif; ?>
