@@ -1,0 +1,29 @@
+steelquote/
+├── config/
+│   └── db.php
+├── includes/
+│   ├── functions.php
+│   ├── header.php
+│   └── footer.php
+├── assets/
+│   └── css/style.css
+├── materials/
+│   ├── index.php
+│   ├── create.php
+│   ├── edit.php
+│   └── delete.php
+├── customers/
+│   ├── index.php
+│   ├── create.php
+│   ├── edit.php
+│   └── delete.php
+├── quotations/
+│   ├── index.php
+│   ├── create.php
+│   ├── view.php
+│   ├── edit.php
+│   ├── delete.php
+│   └── pdf.php
+├── database.sql
+├── index.php  (لوحة التحكم)
+└── README.md

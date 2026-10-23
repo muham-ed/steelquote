@@ -1,0 +1,14 @@
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Server logs & OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# Uploads directory (keep directory structure)
+uploads/logos/*
+!uploads/logos/.gitkeep
