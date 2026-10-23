@@ -52,6 +52,13 @@ $current_user = current_user();
               <i class="bi bi-people me-1"></i> العملاء
             </a>
           </li>
+          <?php if (is_admin()): ?>
+            <li class="nav-item">
+              <a class="nav-link text-danger fw-bold <?= strpos($_SERVER['PHP_SELF'], 'admin') !== false ? 'active' : '' ?>" href="<?= BASE_URL ?>admin/index.php">
+                <i class="bi bi-shield-lock me-1"></i> لوحة المدير (Super Admin)
+              </a>
+            </li>
+          <?php endif; ?>
         </ul>
 
         <div class="d-flex align-items-center ms-lg-3 gap-2">
@@ -64,6 +71,9 @@ $current_user = current_user();
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow">
               <li><a class="dropdown-item" href="<?= BASE_URL ?>settings.php"><i class="bi bi-gear me-2"></i>إعدادات الورشة واللوجو</a></li>
+              <?php if (is_admin()): ?>
+                <li><a class="dropdown-item text-danger fw-bold" href="<?= BASE_URL ?>admin/index.php"><i class="bi bi-shield-lock me-2"></i>لوحة مالك النظام</a></li>
+              <?php endif; ?>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php"><i class="bi bi-box-arrow-right me-2"></i>تسجيل الخروج</a></li>
             </ul>

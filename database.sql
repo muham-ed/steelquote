@@ -1,4 +1,4 @@
--- SteelQuote Multi-Tenant Database Dump
+-- SteelQuote Multi-Tenant & Super-Admin Database Dump
 
 CREATE DATABASE IF NOT EXISTS `steelquote` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `steelquote`;
@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS `users`;
 -- Table structure for `users` (الورش والحسابات)
 CREATE TABLE `users` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `role` ENUM('user', 'admin') NOT NULL DEFAULT 'user',
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(100) NOT NULL UNIQUE,
   `password` VARCHAR(255) NOT NULL,
@@ -22,14 +23,14 @@ CREATE TABLE `users` (
   `address` TEXT DEFAULT NULL,
   `logo` VARCHAR(255) DEFAULT NULL,
   `commercial_reg` VARCHAR(100) DEFAULT NULL,
-  `subscription_status` ENUM('trial', 'active', 'expired') DEFAULT 'trial',
+  `subscription_status` ENUM('trial', 'active', 'expired', 'suspended') DEFAULT 'trial',
   `trial_ends_at` DATE DEFAULT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insert demo workshop user (Password: 123456)
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `workshop_name`, `phone`, `address`, `subscription_status`, `trial_ends_at`) VALUES
-(1, 'المهندس معلم الحدادة', 'admin@steelquote.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ورشة الحدادة والتصنيع الحديثة', '01012345678', 'القاهرة - المنطقة الصناعية', 'active', '2026-12-31');
+-- Insert Super Admin user (Password: 123456)
+INSERT INTO `users` (`id`, `role`, `name`, `email`, `password`, `workshop_name`, `phone`, `address`, `subscription_status`, `trial_ends_at`) VALUES
+(1, 'admin', 'مدير النظام (مالك التطبيق)', 'admin@steelquote.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'إدارة منصة SteelQuote', '01012345678', 'القاهرة - المقر الرئيسي', 'active', '2030-12-31');
 
 -- --------------------------------------------------------
 

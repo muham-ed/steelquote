@@ -5,13 +5,6 @@ function is_logged_in() {
     return !empty($_SESSION['user_id']);
 }
 
-function require_login() {
-    if (!is_logged_in()) {
-        set_flash('error', 'الرجاء تسجيل الدخول أولاً للوصول للنظام.');
-        redirect(BASE_URL . 'login.php');
-    }
-}
-
 function current_user() {
     global $pdo;
     if (!is_logged_in()) return null;
@@ -31,4 +24,34 @@ function current_user() {
 
 function current_user_id() {
     return $_SESSION['user_id'] ?? 1;
+}
+
+function is_admin() {
+    $u = current_user();
+    return $u && ($u['role'] === 'admin');
+}
+
+function require_login() {
+    if (!is_logged_in()) {
+        set_flash('error', 'الرجاء تسجيل الدخول أولاً للوصول للنظام.');
+        redirect(BASE_URL . 'login.php');
+    }
+
+    $u = current_user();
+    $current_page = basename($_SERVER['PHP_SELF']);
+
+    // Check subscription status for non-admin users
+    if ($u['role'] !== 'admin' && in_array($u['subscription_status'], ['expired', 'suspended'])) {
+        if ($current_page !== 'suspended.php' && $current_page !== 'logout.php') {
+            redirect(BASE_URL . 'suspended.php');
+        }
+    }
+}
+
+function require_admin() {
+    require_login();
+    if (!is_admin()) {
+        set_flash('error', 'عذراً، هذه الصفحة مخصصة لمالك المنصة ومدير النظام فقط.');
+        redirect(BASE_URL . 'index.php');
+    }
 }
