@@ -33,6 +33,11 @@ $current_user = current_user();
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link <?= strpos($_SERVER['PHP_SELF'], 'leads') !== false ? 'active fw-bold' : '' ?>" href="<?= BASE_URL ?>leads.php">
+              <i class="bi bi-briefcase me-1"></i> طلبات العملاء (B2B2C)
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link <?= strpos($_SERVER['PHP_SELF'], 'quotations') !== false ? 'active fw-bold' : '' ?>" href="<?= BASE_URL ?>quotations/index.php">
               <i class="bi bi-file-earmark-text me-1"></i> عروض الأسعار
             </a>
@@ -81,6 +86,7 @@ $current_user = current_user();
         </div>
       <?php else: ?>
         <div class="ms-auto">
+          <a href="<?= BASE_URL ?>request_quote.php" class="btn btn-outline-warning text-warning fw-bold me-2"><i class="bi bi-tools me-1"></i> طلب تسعير مشروعك</a>
           <a href="<?= BASE_URL ?>login.php" class="btn btn-outline-light me-2">تسجيل الدخول</a>
           <a href="<?= BASE_URL ?>register.php" class="btn btn-warning fw-bold">سجل ورشتك مجاناً</a>
         </div>
