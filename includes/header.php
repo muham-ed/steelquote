@@ -9,8 +9,8 @@ $current_user = current_user();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= isset($page_title) ? clean($page_title) . ' | SteelQuote' : 'SteelQuote — نظام تسعير ورش الحدادة' ?></title>
     <!-- App Favicon / Browser Icon -->
-    <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>assets/favicon.svg">
-    <link rel="shortcut icon" href="<?= BASE_URL ?>assets/favicon.svg">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>assets/favicon.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>assets/favicon.png">
     <!-- Bootstrap RTL CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -21,8 +21,9 @@ $current_user = current_user();
 <body class="bg-light d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
   <div class="container">
-    <a class="navbar-brand fw-bold text-warning fs-4" href="<?= BASE_URL ?>index.php">
-      <i class="bi bi-tools me-2"></i>SteelQuote
+    <a class="navbar-brand fw-bold text-warning fs-4 d-flex align-items-center gap-2" href="<?= BASE_URL ?>index.php">
+      <img src="<?= BASE_URL ?>assets/logo.png" alt="SteelQuote Logo" style="height: 38px; width: 38px; border-radius: 8px; object-fit: cover;">
+      <span>SteelQuote</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="تبديل القائمة">
       <span class="navbar-toggler-icon"></span>
