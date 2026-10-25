@@ -8,6 +8,9 @@ $current_user = current_user();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= isset($page_title) ? clean($page_title) . ' | SteelQuote' : 'SteelQuote — نظام تسعير ورش الحدادة' ?></title>
+    <!-- App Favicon / Browser Icon -->
+    <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>assets/favicon.svg">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>assets/favicon.svg">
     <!-- Bootstrap RTL CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
